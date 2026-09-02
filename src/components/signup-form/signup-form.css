@@ -1,0 +1,88 @@
+.signup-form {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 64px 24px;
+}
+
+.signup-form h1 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.signup-form-lede {
+  color: var(--color-muted);
+  margin-bottom: 28px;
+}
+
+.signup-form-field {
+  margin-bottom: 18px;
+}
+
+.signup-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.signup-form-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.signup-form-field input,
+.signup-form-field select {
+  width: 100%;
+  font-size: 0.98rem;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.signup-form-field input:focus,
+.signup-form-field select:focus {
+  border-color: var(--color-text);
+}
+
+.signup-form-hint {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin-top: 6px;
+}
+
+.signup-form-submit {
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 4px;
+  border: 1px solid var(--color-text);
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.signup-form-submit:hover {
+  background: #333333;
+}
+
+.signup-form-switch {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.signup-form-switch a {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .signup-form-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,48 @@
+.how-it-works {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.how-it-works h2 {
+  font-size: 1.6rem;
+  margin-bottom: 32px;
+}
+
+.how-it-works-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.how-it-works-step {
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+}
+
+.how-it-works-index {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+
+.how-it-works-step h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.how-it-works-step p {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 720px) {
+  .how-it-works-list {
+    grid-template-columns: 1fr;
+  }
+}

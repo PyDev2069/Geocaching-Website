@@ -1,56 +1,94 @@
-# Geocaching App
+# Waypoint — frontend (no backend, no auth logic yet)
 
-A minimal full-stack app with session-based authentication.
+A stripped-down, black-and-white pass of the frontend. No colors, no auth
+context, no protected routes — just page layouts assembled from
+self-contained components, ready to have real design and real auth wired
+in later.
 
-- `frontend/` — React + Vite (no styling, plain HTML elements)
-- `backend/` — Express + a small JSON-file user store + bcrypt + express-session
-  (deliberately avoids any package that needs native/C++ compilation, so `npm install`
-  works out of the box on Windows/Mac/Linux with no extra build tools)
+## Run it
 
-## Setup
-
-### 1. Backend
 ```
-cd backend
-npm install
-cp .env.example .env   # then edit SESSION_SECRET to a random string
-npm run dev
-```
-Runs on http://localhost:4000. This creates `users.json` (user records) and a
-`sessions/` folder (one file per active login session) inside `backend/` the first
-time it runs.
-
-### 2. Frontend
-```
-cd frontend
 npm install
 npm run dev
 ```
-Runs on http://localhost:5173
 
-Open http://localhost:5173 in your browser. Sign up, then you'll be logged in
-automatically (session cookie is set). Visit /dashboard to see a protected page.
+Open http://localhost:5173.
 
-## How auth works
+## Pages
 
-- Passwords are hashed with bcrypt (12 salt rounds) before being stored — plaintext
-  passwords are never saved. Stored in `backend/users.json`.
-- On login, the password is compared against the stored hash with bcrypt.compare.
-- A signed session cookie (`geocaching.sid`, httpOnly, sameSite=lax) is set on
-  login/register. The session ID maps to a file in `backend/sessions/`, which stores
-  the logged-in user's id server-side.
-- `GET /api/auth/me` reads the session and returns the current user — the frontend
-  calls this on page load to restore login state, and `ProtectedRoute` redirects to
-  /signin if it's not authenticated.
-- Logout destroys the server-side session and clears the cookie.
-- `requireAuth` middleware protects any backend route that needs a logged-in user
-  (see `/api/protected/ping` for an example, and `/api/auth/me`).
+Pages don't contain markup of their own — they only assemble components.
 
-## Note on data storage
+- `/` — `Hero` + `HowItWorks` + `Footer`
+- `/signup` — `SignupForm`
+- `/signin` — `LoginForm`
+- `/dashboard` — `DashboardSummary` (static placeholder, not gated by login)
 
-This uses a flat `users.json` file instead of a real database to keep setup
-dependency-free for a learning project. It's fine for local development and small
-demos, but isn't safe for concurrent writes at scale — if you outgrow it, swap
-`backend/db.js` for a real database (e.g. Postgres via `pg`, or SQLite via
-`better-sqlite3` if you have build tools installed) without touching `routes/auth.js`
-much, since it only calls `findUserByEmail`, `findUserById`, and `createUser`.
+Submitting the login or signup form just navigates to `/dashboard` — there's
+no account storage or validation right now, it's purely there to show the
+placeholder success state.
+
+## Components
+
+Each component lives in its own folder with a same-named CSS file:
+
+```
+src/components/
+  navbar/
+    navbar.jsx
+    navbar.css
+  hero/
+    hero.jsx
+    hero.css
+  how-it-works/
+    how-it-works.jsx
+    how-it-works.css
+  footer/
+    footer.jsx
+    footer.css
+  login-form/
+    login-form.jsx
+    login-form.css
+  signup-form/
+    signup-form.jsx
+    signup-form.css
+  dashboard-summary/
+    dashboard-summary.jsx
+    dashboard-summary.css
+```
+
+`src/index.css` only holds color variables and a standard reset (box
+model, base font, resets for `h1`–`h4`, `p`, `a`, `button`) — no
+component-specific styles live there.
+
+## Colors
+
+Black and white only, defined once in `index.css`:
+
+```css
+--color-bg: #ffffff;
+--color-surface: #f5f5f5;
+--color-border: #d9d9d9;
+--color-text: #111111;
+--color-muted: #5c5c5c;
+```
+
+## What's not here (on purpose)
+
+- No `AuthContext` / `useAuth` — removed for now.
+- No `ProtectedRoute` — `/dashboard` is a plain route.
+- No branding mark or decorative graphics — just text and standard form
+  elements.
+
+## Next step: adding Supabase
+
+When you're ready to wire up real auth:
+
+1. Add an auth layer back (context, hook, or whatever pattern you like)
+   backed by `@supabase/supabase-js`.
+2. In `login-form.jsx` / `signup-form.jsx`, replace the `handleSubmit`
+   body (currently just `navigate('/dashboard')`) with the real
+   `supabase.auth.signInWithPassword` / `signUp` calls.
+3. Re-add a route guard around `/dashboard` if you want it gated again.
+
+Nothing else needs to change — `Navbar`, `Hero`, `HowItWorks`, and
+`Footer` don't know or care about auth.
