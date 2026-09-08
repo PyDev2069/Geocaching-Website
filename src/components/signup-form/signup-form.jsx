@@ -1,126 +1,210 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import './signup-form.css';
 
-function SignupForm() {
-  const navigate = useNavigate();
-  const [form, setForm] = useState({
+export default function SignupForm() {
+  const { signUp } = useAuth();
+  
+  const [formData, setFormData] = useState({
     fullName: '',
     email: '',
+    password: '',
     country: '',
     city: '',
-    profilePrivacy: 'public',
-    password: '',
+    homeLatitude: '',
+    homeLongitude: ''
   });
 
+  const [loading, setLoading] = useState(false);
+  const [geoLoading, setGeoLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleGetLocation = () => {
+    if (!navigator.geolocation) {
+      setErrorMsg('Geolocation is not supported by your browser.');
+      return;
+    }
+
+    setGeoLoading(true);
+    setErrorMsg('');
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setFormData((prev) => ({
+          ...prev,
+          homeLatitude: position.coords.latitude.toFixed(6),
+          homeLongitude: position.coords.longitude.toFixed(6)
+        }));
+        setGeoLoading(false);
+      },
+      (error) => {
+        setErrorMsg('Unable to retrieve location. Please grant permission or enter manually.');
+        setGeoLoading(false);
+      }
+    );
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Placeholder only — no backend yet, so any submission is treated
-    // as a successful signup for now.
-    navigate('/dashboard');
+    setErrorMsg('');
+    setSuccessMsg('');
+    setLoading(true);
+
+    const metadata = {
+      full_name: formData.fullName,
+      country: formData.country,
+      city: formData.city,
+      home_latitude: formData.homeLatitude ? parseFloat(formData.homeLatitude) : null,
+      home_longitude: formData.homeLongitude ? parseFloat(formData.homeLongitude) : null
+    };
+
+    const { error } = await signUp(formData.email, formData.password, metadata);
+
+    if (error) {
+      setErrorMsg(error.message);
+    } else {
+      setSuccessMsg('Account created successfully! Check your email to confirm registration.');
+      setFormData({
+        fullName: '',
+        email: '',
+        password: '',
+        country: '',
+        city: '',
+        homeLatitude: '',
+        homeLongitude: ''
+      });
+    }
+    setLoading(false);
   };
 
   return (
-    <div className="signup-form">
-      <h1>Create an account</h1>
-      <p className="signup-form-lede">It takes about a minute.</p>
+    <div className="signup-container">
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <h2>Create Account</h2>
 
-      <form onSubmit={handleSubmit} noValidate>
-        <div className="signup-form-field">
-          <label htmlFor="fullName">Full name</label>
+        {errorMsg && <div className="alert error">{errorMsg}</div>}
+        {successMsg && <div className="alert success">{successMsg}</div>}
+
+        <div className="form-group">
+          <label htmlFor="fullName">Full Name</label>
           <input
+            type="text"
             id="fullName"
             name="fullName"
-            type="text"
-            autoComplete="name"
-            value={form.fullName}
+            placeholder="John Doe"
+            value={formData.fullName}
             onChange={handleChange}
             required
           />
         </div>
 
-        <div className="signup-form-field">
-          <label htmlFor="email">Email</label>
+        <div className="form-group">
+          <label htmlFor="email">Email Address</label>
           <input
+            type="email"
             id="email"
             name="email"
-            type="email"
-            autoComplete="email"
-            value={form.email}
+            placeholder="name@example.com"
+            value={formData.email}
             onChange={handleChange}
             required
           />
         </div>
 
-        <div className="signup-form-row">
-          <div className="signup-form-field">
-            <label htmlFor="country">Country</label>
-            <input
-              id="country"
-              name="country"
-              type="text"
-              autoComplete="country-name"
-              value={form.country}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="signup-form-field">
-            <label htmlFor="city">City</label>
-            <input
-              id="city"
-              name="city"
-              type="text"
-              autoComplete="address-level2"
-              value={form.city}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        </div>
-
-        <div className="signup-form-field">
-          <label htmlFor="profilePrivacy">Profile visibility</label>
-          <select
-            id="profilePrivacy"
-            name="profilePrivacy"
-            value={form.profilePrivacy}
-            onChange={handleChange}
-          >
-            <option value="public">Public &mdash; other cachers can see your finds</option>
-            <option value="private">Private &mdash; only you can see your finds</option>
-          </select>
-        </div>
-
-        <div className="signup-form-field">
+        <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
+            type="password"
             id="password"
             name="password"
-            type="password"
-            autoComplete="new-password"
-            value={form.password}
+            placeholder="••••••••"
+            value={formData.password}
             onChange={handleChange}
             required
-            minLength={8}
           />
-          <p className="signup-form-hint">At least 8 characters.</p>
         </div>
 
-        <button type="submit" className="signup-form-submit">
-          Create account
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="country">Country</label>
+            <input
+              type="text"
+              id="country"
+              name="country"
+              placeholder="India"
+              value={formData.country}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="city">City</label>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              placeholder="Kolkata"
+              value={formData.city}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className="location-section">
+          <div className="location-header">
+            <span>Home Coordinates</span>
+            <button
+              type="button"
+              className="geo-btn"
+              onClick={handleGetLocation}
+              disabled={geoLoading}
+            >
+              {geoLoading ? 'Fetching...' : 'Get Current Location'}
+            </button>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="homeLatitude">Latitude</label>
+              <input
+                type="number"
+                step="any"
+                id="homeLatitude"
+                name="homeLatitude"
+                placeholder="22.5726"
+                value={formData.homeLatitude}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="homeLongitude">Longitude</label>
+              <input
+                type="number"
+                step="any"
+                id="homeLongitude"
+                name="homeLongitude"
+                placeholder="88.3639"
+                value={formData.homeLongitude}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" className="submit-btn" disabled={loading}>
+          {loading ? 'Creating Account...' : 'Sign Up'}
         </button>
       </form>
-
-      <p className="signup-form-switch">
-        Already have an account? <Link to="/signin">Sign in</Link>
-      </p>
     </div>
   );
 }
-
-export default SignupForm;
