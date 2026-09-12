@@ -1,4 +1,3 @@
-
 import { Search, Route, Eye, Heart } from "lucide-react";
 import Reveal from "./reveal";
 
@@ -28,13 +27,13 @@ const steps = [
 function Journey() {
   return (
     <section
-      className="journey-section section section--green"
+      className="manus-journey-section manus-section manus-section--green"
       id="how-it-works"
     >
-      <div className="container">
-        <Reveal className="journey-heading">
-          <div className="eyebrow eyebrow--light">
-            <span className="eyebrow__line" />
+      <div className="manus-container">
+        <Reveal className="manus-journey-heading">
+          <div className="manus-eyebrow manus-eyebrow--light">
+            <span className="manus-eyebrow__line" />
             The journey
           </div>
 
@@ -46,7 +45,7 @@ function Journey() {
         </Reveal>
 
         <div
-          className="journey-line"
+          className="manus-journey-line"
           aria-label="Find, Follow, Discover, Log"
         >
           {steps.map((step, index) => {
@@ -55,14 +54,14 @@ function Journey() {
             return (
               <Reveal
                 key={step.word}
-                className="journey-step"
+                className="manus-journey-step"
                 style={{ animationDelay: `${index * 80}ms` }}
               >
-                <span className="journey-step__number">
+                <span className="manus-journey-step__number">
                   0{index + 1}
                 </span>
 
-                <span className="journey-step__icon">
+                <span className="manus-journey-step__icon">
                   <Icon size={23} strokeWidth={1.6} />
                 </span>
 
@@ -71,7 +70,7 @@ function Journey() {
                 <span>{step.description}</span>
 
                 {index < 3 && (
-                  <span className="journey-step__connector" />
+                  <span className="manus-journey-step__connector" />
                 )}
               </Reveal>
             );
