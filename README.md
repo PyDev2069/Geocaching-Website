@@ -1,4 +1,4 @@
-# Waypoint — frontend (no backend, no auth logic yet)
+# Geocaching Bharat — frontend (no backend, no auth logic yet)
 
 A stripped-down, black-and-white pass of the frontend. No colors, no auth
 context, no protected routes — just page layouts assembled from
