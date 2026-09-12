@@ -5,22 +5,22 @@ const steps = [
   {
     icon: Search,
     word: "Find",
-    description: "Choose a cache",
+    description: "Discover a cache nearby",
   },
   {
     icon: Route,
-    word: "Follow",
-    description: "Read the clues",
+    word: "Decode",
+    description: "Follow clues & hints",
   },
   {
     icon: Eye,
     word: "Discover",
-    description: "Look closer",
+    description: "Find the hidden cache",
   },
   {
     icon: Heart,
     word: "Log",
-    description: "Leave a note",
+    description: "Verify your find",
   },
 ];
 
@@ -67,11 +67,13 @@ function Journey() {
 
                 <strong>{step.word}</strong>
 
-                <span>{step.description}</span>
+             <p className="manus-journey-step__description">
+  {step.description}
+</p>
 
-                {index < 3 && (
-                  <span className="manus-journey-step__connector" />
-                )}
+{index < 3 && (
+  <span className="manus-journey-step__connector" />
+)}
               </Reveal>
             );
           })}

@@ -627,11 +627,7 @@
   font-size: 17px;
 }
 
-.manus-journey-step > span:last-child {
-  color: rgba(255, 255, 255, 0.5);
-  font-family: "DM Sans", sans-serif;
-  font-size: 12px;
-}
+
 
 .manus-journey-step__connector {
   display: none;
@@ -1005,4 +1001,12 @@
 .manus-feature-row__icon svg {
   color: #113c32 !important;
   stroke: #113c32 !important;
+}
+.manus-journey-step__description {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
 }

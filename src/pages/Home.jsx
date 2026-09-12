@@ -4,6 +4,7 @@ import Features from "../components/landingPage/features";
 import Roles from "../components/landingPage/roles";
 import Journey from "../components/landingPage/journey";
 import FinalCta from "../components/landingPage/finalCta";
+import Footer from "../components/landingPage/footer";
 
 function Home() {
   return (
@@ -21,6 +22,7 @@ function Home() {
       <div className="manus-sections">
         <Journey />
         <FinalCta />
+        <Footer />
       </div>
     </>
   );

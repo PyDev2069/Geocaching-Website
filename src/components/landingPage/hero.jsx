@@ -60,7 +60,7 @@ function TypedTitle() {
 
 function Hero() {
   return (
-    <section className="topo relative flex min-h-[calc(100vh-80px)] items-center overflow-hidden px-4 py-16">
+   <section className="topo relative flex min-h-[calc(100vh-80px)] items-center overflow-hidden px-4 pt-24 pb-16">
       <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
