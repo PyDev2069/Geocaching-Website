@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 function FinalCta() {
   return (
-    <section className="px-4 pb-20">
+    <section className="px-4 pt-10 pb-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

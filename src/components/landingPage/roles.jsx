@@ -119,7 +119,7 @@ function Roles() {
   const [active, setActive] = useState("explorer");
 
   return (
-    <section id="roles" className="px-4 py-24 sm:py-28">
+    <section id="roles" className="px-4 pt-12 pb-24 sm:pt-14 sm:pb-28">
       <div className="mx-auto max-w-6xl">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

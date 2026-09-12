@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 function About() {
   return (
-    <section id="about" className="px-4 py-24 sm:py-28">
+   <section id="about" className="px-4 pt-24 pb-12 sm:pt-28 sm:pb-14">
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
