@@ -1,4 +1,4 @@
-
+import "./styles/landing.css";
 import { useEffect, useRef } from "react";
 
 function Reveal({ children, className = "", style }) {

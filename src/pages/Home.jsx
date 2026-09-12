@@ -1,3 +1,4 @@
+import "../components/landingPage/styles/landing.css";
 import Hero from "../components/landingPage/hero";
 import About from "../components/landingPage/about";
 import Features from "../components/landingPage/features";

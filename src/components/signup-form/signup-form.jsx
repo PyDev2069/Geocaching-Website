@@ -46,7 +46,7 @@ export default function SignupForm() {
         }));
         setGeoLoading(false);
       },
-      (error) => {
+      (_error) => {
         setErrorMsg('Unable to retrieve location. Please grant permission or enter manually.');
         setGeoLoading(false);
       }

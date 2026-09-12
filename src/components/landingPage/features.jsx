@@ -6,6 +6,7 @@ import {
   Gem,
   ArrowUpRight,
 } from "lucide-react";
+import "./styles/landing.css";
 import Reveal from "./reveal";
 
 const features = [

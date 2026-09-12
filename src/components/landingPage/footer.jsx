@@ -1,3 +1,4 @@
+import "./styles/landing.css";
 import { Compass } from "lucide-react";
 
 function Footer() {

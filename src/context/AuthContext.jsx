@@ -9,10 +9,17 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     // Check active session on mount
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => {
+        setUser(session?.user ?? null);
+      })
+      .catch((error) => {
+        console.error('Failed to restore session:', error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
 
     // Listen for auth state changes (sign in, sign out)
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -48,7 +55,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, loading, signUp, signIn, signOut }}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

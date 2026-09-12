@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import { Compass, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
+
 const NAV = [
-  { label: "About", href: "#about" },
-  { label: "Features", href: "#features" },
-  { label: "Roles", href: "#roles" },
-  { label: "Explore", href: "#how-it-works" },
+  { label: "About", href: "/#about" },
+  { label: "Features", href: "/#features" },
+  { label: "Roles", href: "/#roles" },
+  { label: "Explore", href: "/#how-it-works" },
 ];
 
 function Navbar() {
@@ -45,12 +47,14 @@ function Navbar() {
         <ul className="ml-auto hidden items-center gap-7 text-sm font-medium text-muted-foreground md:flex">
           {NAV.map((item) => (
             <li key={item.label}>
-              <a
-                href={item.href}
+              
+              <HashLink
+                smooth
+                to={item.href}
                 className="transition-colors hover:text-foreground"
               >
                 {item.label}
-              </a>
+              </HashLink>
             </li>
           ))}
         </ul>
@@ -92,13 +96,15 @@ function Navbar() {
             <ul className="flex flex-col">
               {NAV.map((item) => (
                 <li key={item.label}>
-                  <a
-                    href={item.href}
+                  
+                  <HashLink
+                    smooth
+                    to={item.href}
                     onClick={() => setOpen(false)}
                     className="block rounded-2xl px-4 py-3 text-sm font-medium hover:bg-secondary"
                   >
                     {item.label}
-                  </a>
+                  </HashLink>
                 </li>
               ))}
             </ul>

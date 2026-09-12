@@ -1,0 +1,454 @@
+/* =========================================================
+   LANDING PAGE — "manus" section family
+   Styles for Features, Journey ("How it works") and Footer,
+   plus the shared .manus-sections / .manus-container / .manus-eyebrow
+   primitives and the Reveal-on-scroll helper.
+   Scoped by the `.manus-sections` wrapper rendered in Home.jsx.
+   ========================================================= */
+
+.manus-sections {
+  --manus-forest: #113c32;
+  --manus-forest-deep: #082c25;
+  --manus-paper: #f4efe6;
+  --manus-paper-light: #fbf9f4;
+  --manus-ink: #17322b;
+  --manus-muted: #66736c;
+  --manus-line: rgba(23, 50, 43, 0.16);
+  --manus-saffron: #f2a455;
+
+  background: var(--manus-paper);
+  color: var(--manus-ink);
+}
+
+.manus-container {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.manus-section {
+  position: relative;
+  padding: 110px 0;
+}
+
+.manus-section--paper {
+  background: var(--manus-paper);
+}
+
+.manus-section--green {
+  background: var(--manus-forest);
+  color: #fff;
+}
+
+/* ---------- Section headings ---------- */
+
+.manus-section-heading-row {
+  display: grid;
+  grid-template-columns: 1fr 0.55fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 70px;
+}
+
+.manus-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: var(--manus-muted);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.manus-eyebrow__line {
+  width: 28px;
+  height: 1px;
+  background: var(--manus-saffron);
+}
+
+.manus-eyebrow--light {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.manus-section-heading {
+  margin: 0;
+  color: var(--manus-ink);
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.manus-section-heading em {
+  color: var(--manus-forest);
+  font-style: italic;
+}
+
+.manus-section-heading-row__aside {
+  max-width: 340px;
+  margin: 0 0 5px auto;
+  color: var(--manus-muted);
+  font-family: "DM Sans", sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ---------- Features ---------- */
+
+.manus-feature-list {
+  border-top: 1px solid var(--manus-line);
+}
+
+.manus-feature-row {
+  display: grid;
+  grid-template-columns: 45px 55px 1fr 1.1fr 25px;
+  gap: 20px;
+  align-items: center;
+  min-height: 105px;
+  border-bottom: 1px solid var(--manus-line);
+  transition:
+    background 0.3s ease,
+    padding 0.3s ease;
+}
+
+.manus-feature-row:hover {
+  padding-left: 12px;
+  padding-right: 12px;
+  background: rgba(17, 60, 50, 0.035);
+}
+
+.manus-feature-row__index {
+  color: var(--manus-muted);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.manus-feature-row__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--manus-line);
+  border-radius: 50%;
+  color: #113c32;
+}
+
+.manus-feature-row__icon svg {
+  color: #113c32;
+  stroke: #113c32;
+}
+
+.manus-feature-row__title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.manus-feature-row p {
+  margin: 0;
+  color: var(--manus-muted);
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.manus-feature-row__arrow {
+  color: var(--manus-muted);
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+.manus-feature-row:hover .manus-feature-row__arrow {
+  transform: translate(3px, -3px);
+  color: var(--manus-saffron);
+}
+
+/* ---------- Journey / How it works ---------- */
+
+.manus-journey-section {
+  overflow: hidden;
+}
+
+.manus-journey-heading {
+  margin-bottom: 75px;
+}
+
+.manus-journey-heading h2 {
+  margin: 0;
+  color: #fff;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(2.5rem, 5vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.manus-journey-heading h2 em {
+  color: var(--manus-saffron);
+  font-style: italic;
+}
+
+.manus-journey-line {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+
+.manus-journey-line::before {
+  content: "";
+  position: absolute;
+  top: 39px;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.manus-journey-step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.manus-journey-step__number {
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.manus-journey-step__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 78px;
+  height: 78px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  background: var(--manus-forest);
+  color: var(--manus-saffron);
+}
+
+.manus-journey-step strong {
+  margin-bottom: 7px;
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 17px;
+}
+
+.manus-journey-step__description {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.manus-journey-step__connector {
+  display: none;
+}
+
+/* ---------- Footer ---------- */
+
+.manus-site-footer {
+  background: var(--manus-forest-deep);
+  color: #fff;
+}
+
+.manus-site-footer__inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr auto;
+  gap: 30px;
+  align-items: center;
+  min-height: 110px;
+}
+
+.manus-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.manus-brand-mark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  color: var(--manus-saffron);
+}
+
+.manus-brand__wordmark {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.manus-brand__wordmark span {
+  color: var(--manus-saffron);
+}
+
+.manus-site-footer__note {
+  color: rgba(255, 255, 255, 0.45);
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+}
+
+.manus-site-footer__links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.manus-site-footer__links a {
+  color: rgba(255, 255, 255, 0.65);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.manus-site-footer__links a:hover {
+  color: var(--manus-saffron);
+}
+
+.manus-site-footer__copyright {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.manus-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.manus-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .manus-section {
+    padding: 85px 0;
+  }
+
+  .manus-section-heading-row {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 50px;
+  }
+
+  .manus-section-heading-row__aside {
+    margin-left: 0;
+  }
+
+  .manus-feature-row {
+    grid-template-columns: 35px 48px 1fr 25px;
+  }
+
+  .manus-feature-row p {
+    display: none;
+  }
+
+  .manus-site-footer__inner {
+    grid-template-columns: 1fr 1fr;
+    padding: 30px 0;
+  }
+
+  .manus-site-footer__links {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 620px) {
+  .manus-container {
+    width: min(100% - 28px, 1120px);
+  }
+
+  .manus-section {
+    padding: 70px 0;
+  }
+
+  .manus-section-heading {
+    font-size: 2.7rem;
+  }
+
+  .manus-feature-row {
+    grid-template-columns: 28px 42px 1fr;
+    gap: 12px;
+    min-height: 90px;
+  }
+
+  .manus-feature-row__title {
+    font-size: 15px;
+  }
+
+  .manus-feature-row__arrow {
+    display: none;
+  }
+
+  .manus-journey-line {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .manus-journey-line::before {
+    top: 50px;
+    bottom: 50px;
+    left: 50%;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+
+  .manus-journey-step {
+    background: var(--manus-forest);
+  }
+
+  .manus-site-footer__inner {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 35px 0;
+  }
+
+  .manus-site-footer__links {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manus-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .manus-feature-row,
+  .manus-feature-row__arrow {
+    transition: none;
+  }
+}

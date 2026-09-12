@@ -1,4 +1,5 @@
 import { Search, Route, Eye, Heart } from "lucide-react";
+import "./styles/landing.css";
 import Reveal from "./reveal";
 
 const steps = [
