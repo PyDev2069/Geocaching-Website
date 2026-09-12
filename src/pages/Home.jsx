@@ -1,13 +1,27 @@
-import Hero from '../components/hero/hero';
-import HowItWorks from '../components/how-it-works/how-it-works';
-import Footer from '../components/footer/footer';
+import Hero from "../components/landingPage/hero";
+import About from "../components/landingPage/about";
+import Features from "../components/landingPage/features";
+import Roles from "../components/landingPage/roles";
+import Journey from "../components/landingPage/journey";
+import FinalCta from "../components/landingPage/finalCta";
 
 function Home() {
   return (
     <>
       <Hero />
-      <HowItWorks />
-      <Footer />
+
+      <About />
+
+      <div className="manus-sections">
+        <Features />
+      </div>
+
+      <Roles />
+
+      <div className="manus-sections">
+        <Journey />
+        <FinalCta />
+      </div>
     </>
   );
 }
